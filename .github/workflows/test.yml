@@ -1,0 +1,17 @@
+name: 2 Minute Schedule Demo
+
+on:
+  schedule:
+    - cron: '*/2 * * * *
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Time
+        run: date
+
+      - name: Message
+        run: echo "Running every 2 minutes"
