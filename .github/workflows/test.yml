@@ -1,9 +1,10 @@
 name: Terraform Pipeline
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+   workflow_dispatch:
+      
 
 jobs:
   terraform:
