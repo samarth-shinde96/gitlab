@@ -1,17 +1,32 @@
-name: Scheduled Workflow
+name: Terraform Pipeline
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'  
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  terraform:
+    runs-on: self-hosted
 
     steps:
-      - name: Print Time
-        run: date
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Message
-        run: echo "Running every 2 minutes"
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        run: |
+          cd day-1Terraform-basic-configure
+          terraform init
+
+      - name: Terraform Plan
+        run: |
+          cd day-1Terraform-basic-configure
+          terraform plan
+
+      - name: Terraform Apply
+        run: |
+          cd day-1Terraform-basic-configure
+          terraform apply -auto-approve
